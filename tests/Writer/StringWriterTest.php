@@ -13,7 +13,7 @@ use ChessZebra\PortableGameNotation\Token\MoveNumber;
 use ChessZebra\PortableGameNotation\Token\TokenIterator;
 use PHPUnit\Framework\TestCase;
 
-final class StringTest extends TestCase
+final class StringWriterTest extends TestCase
 {
     public function testIfDataIsPopulated()
     {

@@ -16,18 +16,54 @@ composer require chesszebra/portable-game-notation
 
 ### Reading
 
+#### From a string
+
 Reading a single PGN game from a string:
 
 ```php
-use ChessZebra\PortableGameNotation\Parser\Parser;
-use ChessZebra\PortableGameNotation\Lexer\StreamLexer;
+use ChessZebra\PortableGameNotation\Reader\StringReader;
 
-$parser = new Parser(new StreamLexer(fopen('games.pgn', 'r')));
+$reader = new StringReader('1. e4 e5');
 
-$tokenIterator = $parser->parse();
+$tokenIterator = $reader->read();
+```
+
+#### From a stream
+
+Reading a single PGN game from a stream:
+
+```php
+use ChessZebra\PortableGameNotation\Reader\StringReader;
+
+$reader = new StreamReader(fopen('games.pgn', 'r'));
+
+$tokenIterator = $reader->read();
 ```
 
 ### Writing
+
+#### To a string
+
+Wriring a PGN game to a string:
+
+```php
+use ChessZebra\PortableGameNotation\TokenIterator;
+use ChessZebra\PortableGameNotation\Token\StandardAlgebraicNotation;
+use ChessZebra\PortableGameNotation\Writer\StringWriter;
+use ChessZebra\StandardAlgebraicNotation\Notation;
+
+$tokenIterator = new TokenIterator([
+    new MoveNumber(1),
+    new StandardAlgebraicNotation(new Notation('e4')),
+]);
+
+$writer = new StringWriter();
+$writer->write($tokenIterator);
+
+$pgn = $writer->getPgn();
+```
+
+#### To a stream
 
 Wriring a PGN game to a stream:
 
