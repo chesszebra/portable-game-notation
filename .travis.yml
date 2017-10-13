@@ -20,7 +20,6 @@ before_script:
   - travis_retry composer install
 
 script:
-  - composer validate --strict
   - vendor/bin/phpcs --standard=psr2 src/
   - vendor/bin/phpunit
 
