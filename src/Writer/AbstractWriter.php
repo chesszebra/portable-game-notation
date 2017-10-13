@@ -149,7 +149,7 @@ abstract class AbstractWriter implements WriterInterface
         return $node->getNumber() . '.';
     }
 
-    private function writeNullMove(NullMove $node)
+    private function writeNullMove(/** @scrutinizer ignore-unused */ NullMove $node)
     {
         return '--';
     }
