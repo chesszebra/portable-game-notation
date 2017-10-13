@@ -7,7 +7,7 @@
  * @license https://github.com/chesszebra/portable-game-notation/blob/master/LICENSE MIT
  */
 
-namespace ChessZebra\PortableGameNotation;
+namespace ChessZebra\PortableGameNotation\Token;
 
 use Iterator;
 

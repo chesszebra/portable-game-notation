@@ -13,15 +13,8 @@ use ChessZebra\PortableGameNotation\Token\MoveNumber;
 use ChessZebra\PortableGameNotation\Token\TokenIterator;
 use PHPUnit\Framework\TestCase;
 
-final class StreamTest extends TestCase
+final class StringTest extends TestCase
 {
-    private $stream;
-
-    protected function setUp()
-    {
-        $this->stream = fopen('php://temp', 'r+');
-    }
-
     public function testIfDataIsPopulated()
     {
         // Arrange
@@ -31,15 +24,12 @@ final class StreamTest extends TestCase
 
         $tokenIterator = new TokenIterator($tokens);
 
-        $writer = new Stream($this->stream);
+        $writer = new StringWriter();
 
         // Act
         $writer->write($tokenIterator);
 
         // Assert
-        rewind($this->stream);
-        $content = stream_get_contents($this->stream);
-
-        static::assertEquals("1.\n\n", $content);
+        static::assertEquals("1.\n\n", $writer->getPgn());
     }
 }

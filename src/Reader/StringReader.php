@@ -7,20 +7,19 @@
  * @license https://github.com/chesszebra/portable-game-notation/blob/master/LICENSE MIT
  */
 
-namespace ChessZebra\PortableGameNotation\Writer;
+namespace ChessZebra\PortableGameNotation\Reader;
 
-use ChessZebra\PortableGameNotation\Token\TokenIterator;
+use ChessZebra\PortableGameNotation\Lexer\StringLexer;
 
-/**
- * An interface that should be implemented by all PGN writers.
- */
-interface WriterInterface
+final class StringReader extends AbstractReader
 {
     /**
-     * Writes the token iterator.
+     * Initializes a new instance of this class.
      *
-     * @param TokenIterator $tokenIterator The token iterator to write.
-     * @return void
+     * @param string $data The data to read.
      */
-    public function write(TokenIterator $tokenIterator): void;
+    public function __construct(string $data)
+    {
+        parent::__construct(new StringLexer($data));
+    }
 }

@@ -7,13 +7,12 @@
  * @license https://github.com/chesszebra/portable-game-notation/blob/master/LICENSE MIT
  */
 
-namespace ChessZebra\PortableGameNotation\Parser;
+namespace ChessZebra\PortableGameNotation\Reader;
 
-use ChessZebra\PortableGameNotation\Lexer\StringLexer;
-use ChessZebra\PortableGameNotation\TokenIterator;
+use ChessZebra\PortableGameNotation\Token\TokenIterator;
 use PHPUnit\Framework\TestCase;
 
-final class ParserTest extends TestCase
+final class AbstractReaderTest extends TestCase
 {
     /**
      * @var string
@@ -51,26 +50,26 @@ final class ParserTest extends TestCase
 0:09:00]} 15. Qc4 {[%clk 0:08:59]} 15... Qxc4 {[%clk 0:08:56]} 0-1';
     }
 
-    public function testParseGame()
+    public function testReadGame()
     {
         // Arrange
-        $parser = new Parser(new StringLexer($this->pgn));
+        $reader = new StringReader($this->pgn);
 
         // Act
-        $tokenIterator = $parser->parse();
+        $tokenIterator = $reader->read();
 
         // Assert
         static::assertInstanceOf(TokenIterator::class, $tokenIterator);
     }
 
-    public function testParseSecondGame()
+    public function testReadSecondGame()
     {
         // Arrange
-        $parser = new Parser(new StringLexer($this->pgn));
-        $parser->parse();
+        $reader = new StringReader($this->pgn);
+        $reader->read();
 
         // Act
-        $tokenIterator = $parser->parse();
+        $tokenIterator = $reader->read();
 
         // Assert
         static::assertInstanceOf(TokenIterator::class, $tokenIterator);
@@ -79,12 +78,12 @@ final class ParserTest extends TestCase
     public function testEndReturnsNull()
     {
         // Arrange
-        $parser = new Parser(new StringLexer($this->pgn));
-        $parser->parse();
-        $parser->parse();
+        $reader = new StringReader($this->pgn);
+        $reader->read();
+        $reader->read();
 
         // Act
-        $tokenIterator = $parser->parse();
+        $tokenIterator = $reader->read();
 
         // Assert
         static::assertNull($tokenIterator);

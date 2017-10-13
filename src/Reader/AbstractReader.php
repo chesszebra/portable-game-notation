@@ -7,14 +7,14 @@
  * @license https://github.com/chesszebra/portable-game-notation/blob/master/LICENSE MIT
  */
 
-namespace ChessZebra\PortableGameNotation\Parser;
+namespace ChessZebra\PortableGameNotation\Reader;
 
 use ChessZebra\PortableGameNotation\Lexer\Exception\InvalidTokenException;
 use ChessZebra\PortableGameNotation\Lexer\LexerInterface;
 use ChessZebra\PortableGameNotation\Token\TagPair;
-use ChessZebra\PortableGameNotation\TokenIterator;
+use ChessZebra\PortableGameNotation\Token\TokenIterator;
 
-final class Parser
+abstract class AbstractReader implements ReaderInterface
 {
     /**
      * @var LexerInterface
@@ -32,12 +32,12 @@ final class Parser
     }
 
     /**
-     * Parses a new game based on the lexer.
+     * Reads a collection of tokens that form a game.
      *
-     * @return TokenIterator|null
-     * @throws InvalidTokenException
+     * @return TokenIterator|null Returns null when no tokens are left; an TokenIterator otherwise.
+     * @throws InvalidTokenException Thrown when an invalid token was found during reading.
      */
-    public function parse(): ?TokenIterator
+    public function read(): ?TokenIterator
     {
         $token = $this->lexer->peekNextToken();
 

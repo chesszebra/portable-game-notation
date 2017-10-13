@@ -9,24 +9,33 @@
 
 namespace ChessZebra\PortableGameNotation\Writer;
 
-final class Stream extends AbstractWriter
+final class StringWriter extends AbstractWriter
 {
     /**
-     * @var resource
+     * @var string
      */
-    private $resource;
+    private $pgn;
 
     /**
      * Initializes a new instance of this class.
      *
-     * @param resource $resource The resource to write to.
      * @param bool $showMoveNumberTwice Whether or not to repeat the move number.
      */
-    public function __construct($resource, bool $showMoveNumberTwice = false)
+    public function __construct(bool $showMoveNumberTwice = false)
     {
-        $this->resource = $resource;
-
         parent::__construct($showMoveNumberTwice);
+
+        $this->pgn = '';
+    }
+
+    /**
+     * Gets the PGN data that was written.
+     *
+     * @return string
+     */
+    public function getPgn(): string
+    {
+        return $this->pgn;
     }
 
     /**
@@ -37,6 +46,6 @@ final class Stream extends AbstractWriter
      */
     protected function writeGame(string $pgn): void
     {
-        fwrite($this->resource, $pgn);
+        $this->pgn .= $pgn;
     }
 }

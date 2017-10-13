@@ -9,7 +9,6 @@
 
 namespace ChessZebra\PortableGameNotation\Token;
 
-use ChessZebra\PortableGameNotation\TokenIterator;
 use PHPUnit\Framework\TestCase;
 
 final class TokenIteratorTest extends TestCase
