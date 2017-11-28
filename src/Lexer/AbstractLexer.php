@@ -87,13 +87,13 @@ abstract class AbstractLexer implements LexerInterface
         // Match a Recursive Annotation Variation:
         if (preg_match('/^\s*[\(|\)]/s', $this->buffer, $matches)) {
             $this->buffer = substr($this->buffer, strlen($matches[0]));
-            return new RecursiveAnnotationVariation($matches[0] === '(');
+            return new RecursiveAnnotationVariation(trim($matches[0]) === '(');
         }
 
         // Match a Numeric Annotation Glyph
         if (preg_match('/^\s*\$([0-9]+)\s*/', $this->buffer, $matches)) {
             $this->buffer = substr($this->buffer, strlen($matches[0]));
-            return new NumericAnnotationGlyph((int)$matches[1]);
+            return new NumericAnnotationGlyph((int)trim($matches[1]));
         }
 
         // Match a null move

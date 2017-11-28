@@ -39,11 +39,11 @@ abstract class AbstractReader implements ReaderInterface
      */
     public function read(): ?TokenIterator
     {
-        $token = $this->lexer->peekNextToken();
-
-        if ($token === null) {
+        if ($this->lexer->peekNextToken() === null) {
             return null;
         }
+
+        $token = $this->lexer->getNextToken();
 
         $tokens = [];
 

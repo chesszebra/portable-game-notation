@@ -183,6 +183,36 @@ final class AbstractLexerTest extends TestCase
         static::assertTrue($result->isOpening());
     }
 
+    public function testMatchRecursiveAnnotationVariationOpeningWithSpaceAtBegin()
+    {
+        // Arrange
+        $buffer = ' (';
+
+        $lexer = new StringLexer($buffer);
+
+        // Act
+        $result = $lexer->getNextToken();
+
+        // Assert
+        static::assertInstanceOf(RecursiveAnnotationVariation::class, $result);
+        static::assertTrue($result->isOpening());
+    }
+
+    public function testMatchRecursiveAnnotationVariationOpeningWithSpaceAtEnd()
+    {
+        // Arrange
+        $buffer = '( ';
+
+        $lexer = new StringLexer($buffer);
+
+        // Act
+        $result = $lexer->getNextToken();
+
+        // Assert
+        static::assertInstanceOf(RecursiveAnnotationVariation::class, $result);
+        static::assertTrue($result->isOpening());
+    }
+
     public function testMatchRecursiveAnnotationVariationClosing()
     {
         // Arrange
@@ -198,10 +228,55 @@ final class AbstractLexerTest extends TestCase
         static::assertFalse($result->isOpening());
     }
 
+    public function testMatchRecursiveAnnotationVariationClosingWithSpaceAtEnd()
+    {
+        // Arrange
+        $buffer = ') ';
+
+        $lexer = new StringLexer($buffer);
+
+        // Act
+        $result = $lexer->getNextToken();
+
+        // Assert
+        static::assertInstanceOf(RecursiveAnnotationVariation::class, $result);
+        static::assertFalse($result->isOpening());
+    }
+
+    public function testMatchRecursiveAnnotationVariationClosingWithSpaceAtBegin()
+    {
+        // Arrange
+        $buffer = ' )';
+
+        $lexer = new StringLexer($buffer);
+
+        // Act
+        $result = $lexer->getNextToken();
+
+        // Assert
+        static::assertInstanceOf(RecursiveAnnotationVariation::class, $result);
+        static::assertFalse($result->isOpening());
+    }
+
     public function testMatchNumericAnnotationGlyph()
     {
         // Arrange
         $buffer = '$123';
+
+        $lexer = new StringLexer($buffer);
+
+        // Act
+        $result = $lexer->getNextToken();
+
+        // Assert
+        static::assertInstanceOf(NumericAnnotationGlyph::class, $result);
+        static::assertEquals(123, $result->getValue());
+    }
+
+    public function testMatchNumericAnnotationGlyphWithSpace()
+    {
+        // Arrange
+        $buffer = ' $123';
 
         $lexer = new StringLexer($buffer);
 
