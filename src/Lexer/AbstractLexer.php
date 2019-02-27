@@ -102,6 +102,12 @@ abstract class AbstractLexer implements LexerInterface
             return new NullMove();
         }
 
+        // Match a null move
+        if (preg_match('/^\s*Z0\s*/', $this->buffer, $matches)) {
+            $this->buffer = substr($this->buffer, strlen($matches[0]));
+            return new NullMove();
+        }
+
         throw InvalidTokenException::createForBuffer($this->buffer);
     }
 
