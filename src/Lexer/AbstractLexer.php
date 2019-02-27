@@ -54,6 +54,18 @@ abstract class AbstractLexer implements LexerInterface
             return new TagPair($matches[1], $matches[3]);
         }
 
+        // Match a null move
+        if (preg_match('/^\s*--\s*/', $this->buffer, $matches)) {
+            $this->buffer = substr($this->buffer, strlen($matches[0]));
+            return new NullMove();
+        }
+
+        // Match a null move
+        if (preg_match('/^\s*Z0\s*/', $this->buffer, $matches)) {
+            $this->buffer = substr($this->buffer, strlen($matches[0]));
+            return new NullMove();
+        }
+
         // Match an end result:
         if (preg_match('/^\s*(\*|1-0|0-1|1\/2-1\/2)\s*/', $this->buffer, $matches)) {
             $this->buffer = substr($this->buffer, strlen($matches[0]));
@@ -94,18 +106,6 @@ abstract class AbstractLexer implements LexerInterface
         if (preg_match('/^\s*\$([0-9]+)\s*/', $this->buffer, $matches)) {
             $this->buffer = substr($this->buffer, strlen($matches[0]));
             return new NumericAnnotationGlyph((int)trim($matches[1]));
-        }
-
-        // Match a null move
-        if (preg_match('/^\s*--\s*/', $this->buffer, $matches)) {
-            $this->buffer = substr($this->buffer, strlen($matches[0]));
-            return new NullMove();
-        }
-
-        // Match a null move
-        if (preg_match('/^\s*Z0\s*/', $this->buffer, $matches)) {
-            $this->buffer = substr($this->buffer, strlen($matches[0]));
-            return new NullMove();
         }
 
         throw InvalidTokenException::createForBuffer($this->buffer);

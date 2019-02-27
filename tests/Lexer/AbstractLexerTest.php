@@ -126,10 +126,24 @@ final class AbstractLexerTest extends TestCase
         static::assertEquals('1-0', $result->getResult());
     }
 
-    public function testMatchNullMove()
+    public function testMatchNullMoveWithDashes()
     {
         // Arrange
         $buffer = '--';
+
+        $lexer = new StringLexer($buffer);
+
+        // Act
+        $result = $lexer->getNextToken();
+
+        // Assert
+        static::assertInstanceOf(NullMove::class, $result);
+    }
+
+    public function testMatchNullMoveWithZ0()
+    {
+        // Arrange
+        $buffer = 'Z0';
 
         $lexer = new StringLexer($buffer);
 
