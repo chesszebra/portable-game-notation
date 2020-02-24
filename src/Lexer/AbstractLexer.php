@@ -84,6 +84,12 @@ abstract class AbstractLexer implements LexerInterface
             return new StandardAlgebraicNotation(new Notation($matches[1]));
         }
 
+        // Match a SAN (castling):
+        if (preg_match('/^\s*(0-0(?:-0)?[\+\-\!\#\=\?]*)\s*/s', $this->buffer, $matches)) {
+            $this->buffer = substr($this->buffer, strlen($matches[0]));
+            return new StandardAlgebraicNotation(new Notation($matches[1]));
+        }
+
         // Match a SAN:
         if (preg_match('/^\s*([a-zA-Z][a-zA-Z0-9\+\-\!\#\=\?]+)\s*/s', $this->buffer, $matches)) {
             $this->buffer = substr($this->buffer, strlen($matches[0]));

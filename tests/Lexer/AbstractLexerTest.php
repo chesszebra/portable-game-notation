@@ -316,6 +316,20 @@ final class AbstractLexerTest extends TestCase
         static::assertInstanceOf(StandardAlgebraicNotation::class, $result);
     }
 
+    public function testMatchSANCastlingZeroes()
+    {
+        // Arrange
+        $buffer = '0-0';
+
+        $lexer = new StringLexer($buffer);
+
+        // Act
+        $result = $lexer->getNextToken();
+
+        // Assert
+        static::assertInstanceOf(StandardAlgebraicNotation::class, $result);
+    }
+
     public function testMatchSAN()
     {
         // Arrange

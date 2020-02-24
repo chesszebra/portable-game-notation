@@ -1,23 +1,23 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7a18aed560a9994bb6cbd218f13ac0c7",
+    "content-hash": "011207aea66920dfd8c61b490d5bcc8e",
     "packages": [
         {
             "name": "chesszebra/standard-algebraic-notation",
-            "version": "1.0.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/chesszebra/standard-algebraic-notation.git",
-                "reference": "659c86bbeb2b3fe3f38c7d0925ab289a155e9a31"
+                "reference": "29f45650898e119df153191a4c12944b3a0c8b6a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/chesszebra/standard-algebraic-notation/zipball/659c86bbeb2b3fe3f38c7d0925ab289a155e9a31",
-                "reference": "659c86bbeb2b3fe3f38c7d0925ab289a155e9a31",
+                "url": "https://api.github.com/repos/chesszebra/standard-algebraic-notation/zipball/29f45650898e119df153191a4c12944b3a0c8b6a",
+                "reference": "29f45650898e119df153191a4c12944b3a0c8b6a",
                 "shasum": ""
             },
             "require": {
@@ -38,7 +38,7 @@
                 "MIT"
             ],
             "description": "A PHP library that parses Standard Algebraic Notation (SAN) values.",
-            "time": "2017-10-08T19:18:42+00:00"
+            "time": "2020-02-24T21:31:16+00:00"
         }
     ],
     "packages-dev": [
