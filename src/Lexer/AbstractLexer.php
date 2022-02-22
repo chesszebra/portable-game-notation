@@ -97,7 +97,7 @@ abstract class AbstractLexer implements LexerInterface
         }
 
         // Match a comment:
-        if (preg_match('/^\s*\{(.+?)\}\s*/s', $this->buffer, $matches)) {
+        if (preg_match('/^\s*\{(.*?)\}\s*/s', $this->buffer, $matches)) {
             $this->buffer = substr($this->buffer, strlen($matches[0]));
             return new Comment($matches[1]);
         }
